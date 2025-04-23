@@ -31,5 +31,5 @@ export class Review {
   reviewDate: Date;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  rate: number;
+  reviewRate: number;
 }

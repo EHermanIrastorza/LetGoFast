@@ -1,14 +1,14 @@
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateReviewDto {
   @IsString()
   user_id: string;
 
   @IsString()
-  review: string;
+  product_id: string;
 
-  @IsDate()
-  reviewDate: Date;
+  @IsString()
+  review: string;
 
   @IsNumber()
   reviewRate: number;

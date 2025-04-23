@@ -10,11 +10,12 @@ export class ProductsRepository {
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
   ) {}
-  async create(createProductDto: CreateProductDto) {
-    throw new Error('Method not implemented.');
+  async createProduct(createProductDto: CreateProductDto) {
+    const newProduct = this.productRepository.create(createProductDto);
+    return await this.productRepository.save(newProduct);
   }
 
-  getProducts() {
-    return 'This action returns all products';
+  async getProducts() {
+    return await this.productRepository.find();
   }
 }

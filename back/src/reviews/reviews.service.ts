@@ -1,10 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Review } from './entities/review.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Product } from 'src/products/entities/product.entity';
 import { Repository } from 'typeorm';
+import { CreateReviewDto } from './dto/create-review.dto';
 
 @Injectable()
 export class ReviewsService {
@@ -17,27 +22,28 @@ export class ReviewsService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async createReview(
-    userId: string,
-    productId: string,
-    reviewData: { review: string; rate: number },
-  ): Promise<Review> {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
+  async createReview(createReviewDto: CreateReviewDto): Promise<Review> {
+    const { user_id, product_id, reviewRate, review } = createReviewDto;
+    const user = await this.userRepository.findOne({ where: { id: user_id } });
     const product = await this.productRepository.findOne({
-      where: { id: productId },
+      where: { id: product_id },
     });
 
     if (!user || !product)
       throw new NotFoundException('User or Product not found');
+    const alreadyReview = await this.reviewRepository.findOne({
+      where: { user, product },
+    });
+    if (alreadyReview) throw new BadRequestException('Review already exists');
 
-    const review = this.reviewRepository.create({
+    const newreview = this.reviewRepository.create({
       user,
       product,
-      review: reviewData.review,
-      rate: reviewData.rate,
+      review,
+      reviewRate,
     });
 
-    return this.reviewRepository.save(review);
+    return await this.reviewRepository.save(newreview);
   }
   async getAllReviews(): Promise<Review[]> {
     return this.reviewRepository.find({ relations: ['user', 'product'] });
@@ -49,7 +55,6 @@ export class ReviewsService {
       relations: ['products'],
     });
   }
-
   findAll() {
     return `This action returns all reviews`;
   }
