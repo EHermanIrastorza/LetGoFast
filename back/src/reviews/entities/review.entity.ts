@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { Product } from './product.entity';
 import { User } from 'src/users/entities/user.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @Entity('review')
 @Unique(['product', 'user'])

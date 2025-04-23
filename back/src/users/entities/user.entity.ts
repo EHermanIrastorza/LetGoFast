@@ -1,4 +1,4 @@
-import { Review } from 'src/products/entities/review.entity';
+import { Review } from 'src/reviews/entities/review.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'users' })
