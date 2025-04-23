@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Review } from 'src/products/entities/review.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class User {
@@ -22,4 +23,7 @@ export class User {
 
   @Column()
   credictCard: number;
+
+  @OneToMany(() => Review, (review) => review.user)
+  reviews: Review[];
 }

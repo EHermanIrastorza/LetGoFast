@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Review } from './review.entity';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -16,4 +17,19 @@ export class Product {
 
   @Column({ type: 'text' })
   productImage: string;
+
+  @Column({ type: 'varchar', length: 20 })
+  productModel: string;
+
+  @Column({ type: 'varchar', length: 20 })
+  productSpeed: string;
+
+  @Column({ type: 'varchar', length: 20 })
+  productGear: string;
+
+  @Column({ type: 'varchar', length: 20 })
+  productStyle: string;
+
+  @OneToMany(() => Review, (review) => review.product)
+  reviews: Review[];
 }

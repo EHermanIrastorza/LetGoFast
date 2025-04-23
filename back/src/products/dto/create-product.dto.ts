@@ -16,4 +16,20 @@ export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
   productDescription: string;
+
+  @IsString()
+  @IsNotEmpty()
+  productModel: string;
+
+  @IsString()
+  @IsNotEmpty()
+  productSpeed: string;
+
+  @IsString()
+  @IsNotEmpty()
+  productGear: string;
+
+  @IsString()
+  @IsNotEmpty()
+  productStyle: string;
 }
