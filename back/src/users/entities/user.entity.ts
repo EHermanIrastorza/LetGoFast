@@ -1,3 +1,4 @@
+import { TestDriveReservation } from 'src/reserves/entities/reserve.entity';
 import { Review } from 'src/reviews/entities/review.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -26,4 +27,10 @@ export class User {
 
   @OneToMany(() => Review, (review) => review.user)
   reviews: Review[];
+
+  @OneToMany(
+    () => TestDriveReservation,
+    (TestDriveReservation) => TestDriveReservation.user,
+  )
+  TestDriveReservation: TestDriveReservation[];
 }

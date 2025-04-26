@@ -1,4 +1,11 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
+import {
+  ArrayNotEmpty,
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+} from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
@@ -9,9 +16,10 @@ export class CreateProductDto {
   @IsPositive()
   productPrice: number;
 
-  @IsString()
+  @IsArray()
+  @ArrayNotEmpty()
   @IsNotEmpty()
-  productImage: string;
+  productImage: string[];
 
   @IsString()
   @IsNotEmpty()

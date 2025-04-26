@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UpdateReviewDto } from './dto/update-review.dto';
+// import { UpdateReviewDto } from './dto/update-review.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Review } from './entities/review.entity';
 import { User } from 'src/users/entities/user.entity';
@@ -63,9 +63,9 @@ export class ReviewsService {
     return `This action returns a #${id} review`;
   }
 
-  update(id: number, UpdateReviewDto: UpdateReviewDto) {
-    return `This action updates a #${id} review`;
-  }
+  // update(id: number, UpdateReviewDto: UpdateReviewDto) {
+  //   return `This action updates a #${id} review`;
+  // }
 
   remove(id: number) {
     return `This action removes a #${id} review`;

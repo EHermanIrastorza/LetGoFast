@@ -1,5 +1,12 @@
+import { TestDriveReservation } from 'src/reserves/entities/reserve.entity';
 import { Review } from 'src/reviews/entities/review.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -16,7 +23,7 @@ export class Product {
   productPrice: number;
 
   @Column({ type: 'text', nullable: true })
-  productImage: string;
+  productImage: string[];
 
   @Column({ type: 'varchar', length: 20 })
   productModel: string;
@@ -32,4 +39,10 @@ export class Product {
 
   @OneToMany(() => Review, (review) => review.product)
   reviews: Review[];
+
+  @OneToOne(
+    () => TestDriveReservation,
+    (TestDriveReservation) => TestDriveReservation.product,
+  )
+  TestDriveReservation: TestDriveReservation;
 }
