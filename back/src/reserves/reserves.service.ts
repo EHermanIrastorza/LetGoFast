@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateReserveDto } from './dto/create-reserve.dto';
-import { UpdateReserveDto } from './dto/update-reserve.dto';
+// import { UpdateReserveDto } from './dto/update-reserve.dto';
+import { ReservesRepository } from './reserves.repository';
 
 @Injectable()
 export class ReservesService {
-  constructor() {}
-  create(createReserveDto: CreateReserveDto) {
-    return 'This action adds a new reserve';
+  constructor(private readonly reservesRepository: ReservesRepository) {}
+  async create(createReserveDto: CreateReserveDto) {
+    return await this.reservesRepository.createReserve(createReserveDto);
   }
 
   findAll() {
@@ -17,9 +18,9 @@ export class ReservesService {
     return `This action returns a #${id} reserve`;
   }
 
-  update(id: number, updateReserveDto: UpdateReserveDto) {
-    return `This action updates a #${id} reserve`;
-  }
+  // update(id: number, updateReserveDto: UpdateReserveDto) {
+  //   return `This action updates a #${id} reserve`;
+  // }
 
   remove(id: number) {
     return `This action removes a #${id} reserve`;
