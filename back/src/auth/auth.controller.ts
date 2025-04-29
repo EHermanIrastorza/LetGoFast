@@ -17,13 +17,13 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  signIn(@Body() CreateUserDto: CreateUserDto) {
-    return this.authService.signIn(CreateUserDto);
+  signUp(@Body() CreateUserDto: CreateUserDto) {
+    return this.authService.signUp(CreateUserDto);
   }
-  // @Post('login')
-  // signUp(@Body() createAuthDto: CreateAuthDto) {
-  //   return this.authService.singUp(createAuthDto);
-  // }
+  @Post('login')
+  signIn(@Body() createAuthDto: CreateAuthDto) {
+    return this.authService.signIn(createAuthDto);
+  }
 
   @Get()
   findAll() {

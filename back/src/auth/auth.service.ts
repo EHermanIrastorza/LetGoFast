@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { UsersRepository } from 'src/users/users.repository';
@@ -14,7 +14,7 @@ export class AuthService {
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
-  async signIn(CreateUserDto: CreateUserDto) {
+  async signUp(CreateUserDto: CreateUserDto) {
       // userService ya verifica el mail
       // const repeatedUser = await this.userRepository.findOne({
       //   where: { email: createAuthDto.email },
@@ -66,6 +66,29 @@ export class AuthService {
               // };
             }
             
+            async signIn(createAuthDto: CreateAuthDto) {
+              const user = await this.userService.findByEmail(createAuthDto.email);
+              if (!user) throw new NotFoundException('User not found');
+             console.log(user.password, user.email);
+              const isPasswordValid = await bcrypt.compare(
+                createAuthDto.password,
+                user.password,
+              );
+              if (!isPasswordValid) throw new UnauthorizedException('Invalid password');
+            
+              const payload = { sub: user.id, email: user.email };
+              const token = await this.jwtService.sign(payload);
+            
+              return {
+                message: 'User logged in successfully',
+                user: {
+                  id: user.id,
+                  email: user.email,
+                },
+                token,
+              };
+            }
+
             findAll() {
               return `This action returns all auth`;
             }
