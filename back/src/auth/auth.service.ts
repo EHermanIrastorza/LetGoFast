@@ -69,7 +69,6 @@ export class AuthService {
             async signIn(createAuthDto: CreateAuthDto) {
               const user = await this.userService.findByEmail(createAuthDto.email);
               if (!user) throw new NotFoundException('User not found');
-             console.log(user.password, user.email);
               const isPasswordValid = await bcrypt.compare(
                 createAuthDto.password,
                 user.password,
@@ -81,10 +80,10 @@ export class AuthService {
             
               return {
                 message: 'User logged in successfully',
-                user: {
-                  id: user.id,
-                  email: user.email,
-                },
+                // user: {
+                //   id: user.id,
+                //   email: user.email,
+                // },
                 token,
               };
             }

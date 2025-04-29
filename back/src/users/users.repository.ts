@@ -29,7 +29,12 @@ export class UsersRepository {
   }
 
   async findUserByEmail(email: string) {
-    return await this.userRepository.findOne({ where: { email } });
-    
+    const user = await this.userRepository
+    .createQueryBuilder('user')
+    .where('user.email = :email', { email })
+    .addSelect('user.password') 
+    .getOne();
+     return user;
+    // return await this.userRepository.findOne({ where: { email } });
   }
 }
