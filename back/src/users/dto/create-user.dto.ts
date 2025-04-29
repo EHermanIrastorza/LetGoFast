@@ -6,6 +6,7 @@ import {
   IsString,
   IsStrongPassword,
   Length,
+  MinLength,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -27,9 +28,10 @@ export class CreateUserDto {
   @IsNotEmpty()
   birthday: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  credictCard: number;
+    @IsString()
+    @IsNotEmpty()
+    @MinLength(16, { message: 'Min length is 16' })
+    credictCard: string;
 
   @IsString()
   @IsNotEmpty()

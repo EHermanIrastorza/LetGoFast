@@ -7,7 +7,9 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { ReservesModule } from './reserves/reserves.module';
+import { AuthModule } from './auth/auth.module';
 import typeOrmConfig from './config/typeorm';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -21,11 +23,20 @@ import typeOrmConfig from './config/typeorm';
         }
         return config;
       },
+      
     }),
+    
+    JwtModule.register({
+      global: true,
+      signOptions: { expiresIn: '7d' },
+      secret: process.env.JWT_SECRET,
+    }),
+
     UsersModule,
     ProductsModule,
     ReviewsModule,
     ReservesModule,
+    AuthModule,
   ],
 
   controllers: [AppController],

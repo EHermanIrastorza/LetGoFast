@@ -13,10 +13,10 @@ export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 50, nullable: false })
   productName: string;
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'varchar', length: 500 })
   productDescription: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
@@ -25,16 +25,16 @@ export class Product {
   @Column({ type: 'text', nullable: true })
   productImage: string[];
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 50 })
   productModel: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 50 })
   productSpeed: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 50 })
   productGear: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 50 })
   productStyle: string;
 
   @OneToMany(() => Review, (review) => review.product)

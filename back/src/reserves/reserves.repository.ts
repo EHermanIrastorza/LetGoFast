@@ -37,6 +37,8 @@ export class ReservesRepository {
     const newReserve = this.ReservesRepository.create({
       date,
       time,
+      user,
+      product,
     });
 
     return await this.ReservesRepository.save(newReserve);

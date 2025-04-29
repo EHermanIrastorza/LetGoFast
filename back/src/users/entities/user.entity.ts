@@ -22,8 +22,8 @@ export class User {
   @Column({ type: 'varchar', length: 50 })
   city: string;
 
-  @Column()
-  credictCard: number;
+  @Column({ type: 'varchar', length: 16 })
+  credictCard: string;
 
   @OneToMany(() => Review, (review) => review.user)
   reviews: Review[];

@@ -2,9 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersRepository {
+  findOne(arg0: { where: { email: string; }; }) {
+    throw new Error('Method not implemented.');
+  }
+  create(arg0: { password: any; email: string; }) {
+    throw new Error('Method not implemented.');
+  }
+  save(user: any) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -13,8 +23,8 @@ export class UsersRepository {
     return await this.userRepository.find();
   }
 
-  async createUser(createUser) {
-    const user = this.userRepository.create(createUser);
+  async createUser(createUserDto: CreateUserDto){
+    const user = this.userRepository.create(createUserDto);
     return await this.userRepository.save(user);
   }
 
