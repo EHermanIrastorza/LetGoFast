@@ -1,7 +1,6 @@
 import { ProductInterface } from "@/interface/productInterface";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL;
-console.log("APIURL", APIURL);
 
 export async function fetchProducts(): Promise<ProductInterface[]> {
     try {
