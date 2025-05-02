@@ -8,6 +8,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
+
+
 export const metadata: Metadata = {
   title: "Let's Go Fast",
   description: "A faster way to test your supercars and take one with you.",
@@ -23,7 +25,7 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} antialiased `}
       >
-        <Navbar/>
+        <Navbar />
         {children}
       </body>
     </html>
