@@ -3,15 +3,15 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     domains: [
-      "billeder.bilinfo.net",
-      "cdn.autohaus.de",
-      "cdn.autoproyecto.com",
-      "cdn.ferrari.com",
-      "cdn.motor1.com",
       "cdn.shopify.com",
-      "granturismo.dk",
-      "img.classistatic.de",
       "www.diariomotor.com",
+      "cdn.motor1.com",
+      "cdn.autobild.es",
+      "d62-a.sdn.cz",
+      "festivalautomobile.com",
+      "fotografias.lasexta.com",
+      "pictures.porsche.com",
+      "cdn-images.motor.es",
     ],
   },
   unoptimized: true,

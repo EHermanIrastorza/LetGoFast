@@ -18,4 +18,7 @@ export class ProductsRepository {
   async getProducts() {
     return await this.productRepository.find();
   }
+ async getProduct(id: string){
+   return await this.productRepository.findOne({ where: { id } });
+ }
 }

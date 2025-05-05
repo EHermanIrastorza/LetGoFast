@@ -1,4 +1,4 @@
-import ProductCards from "@/view/prodcutcards";
+import ProductCards from "@/view/prodcutscards";
 
 const Product = () => {
     return <div>

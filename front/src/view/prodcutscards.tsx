@@ -5,16 +5,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 
-const ProductCards = () => {
+const ProductsCards = () => {
     const [products, setProducts] = useState<ProductInterface[]>([]);
 
     useEffect(() => {
         const getProducts = async () => {
             try {
                 const productData = await fetchProducts();
-                console.log(productData);
                 setProducts(productData);
-                console.log(products);
             } catch (error: unknown) {
                 if (error instanceof Error) {
                     throw new Error(error.message);
@@ -46,4 +44,4 @@ const ProductCards = () => {
     )
 }
 
-export default ProductCards;
+export default ProductsCards;
