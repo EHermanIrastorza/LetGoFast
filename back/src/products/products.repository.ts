@@ -19,6 +19,6 @@ export class ProductsRepository {
     return await this.productRepository.find();
   }
  async getProduct(id: string){
-   return await this.productRepository.findOne({ where: { id } });
+   return await this.productRepository.findOne({ where: { id }, relations:['reviews'] });
  }
 }

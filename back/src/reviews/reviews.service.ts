@@ -28,21 +28,21 @@ export class ReviewsService {
     const product = await this.productRepository.findOne({
       where: { id: product_id },
     });
-
     if (!user || !product)
       throw new NotFoundException('User or Product not found');
     const alreadyReview = await this.reviewRepository.findOne({
-      where: { user, product },
+      where: { user, product: { id: product_id } },
     });
+    console.log('alreadyReview', alreadyReview);
     if (alreadyReview) throw new BadRequestException('Review already exists');
-
+    
     const newreview = this.reviewRepository.create({
       user,
       product,
       review,
       reviewRate,
     });
-
+    console.log('newreview', newreview);
     return await this.reviewRepository.save(newreview);
   }
   async getAllReviews(): Promise<Review[]> {
