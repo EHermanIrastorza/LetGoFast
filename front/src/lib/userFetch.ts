@@ -1,8 +1,9 @@
 import { Iregister } from "@/interface/registerInterface";
+import { Ilogin} from "@/interface/userInterface";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function registerUser(userData: Iregister): Promise<Iregister> {
+export async function registerUser(userData: Iregister): Promise<Ilogin> {
     try {
         const res = await fetch(`${APIURL}/auth/register`, {
             method: "POST",
@@ -12,9 +13,9 @@ export async function registerUser(userData: Iregister): Promise<Iregister> {
             body: JSON.stringify(userData),
         });
         if (!res.ok) {
-            throw new Error("Failed to register user");
+            throw new Error("Failed to register user, password or email unvalid");
         }
-        const user: Iregister = await res.json();
+        const user: Ilogin = await res.json();
         console.log("user", user);
         return user;
     } catch (error: unknown) {
@@ -26,7 +27,7 @@ export async function registerUser(userData: Iregister): Promise<Iregister> {
     }
 }
 
-export async function loginUser(userData: Iregister): Promise<Iregister> {
+export async function loginUser(userData: Iregister): Promise<Ilogin> {
     try {
         const res = await fetch(`${APIURL}/auth/login`, {
             method: "POST",
@@ -38,7 +39,7 @@ export async function loginUser(userData: Iregister): Promise<Iregister> {
         if (!res.ok) {
             throw new Error("Failed to login user");
         }
-        const user: Iregister = await res.json();
+        const user: Ilogin = await res.json();
         console.log("user", user);
         return user;
     } catch (error: unknown) {

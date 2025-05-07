@@ -1,5 +1,6 @@
 "use client"
 import SubmitButton from "@/components/buttom/submitButtom";
+import { useAuth } from "@/context/authContext";
 import { Iregister } from "@/interface/registerInterface";
 import { loginUser } from "@/lib/userFetch";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -13,11 +14,13 @@ const LogInView = () => {
         email: "",
         credictCard: "",
     };
+    const { login } = useAuth()
 
     const handleSubmit = async (values: Iregister) => {
         try {
             const res = await loginUser(values)
-            console.log("User logged in successfully:", res);
+            login(res.user, res.token)
+            console.log("User logged in successfully:", res.user);
             alert("User logged in successfully")
         } catch (error) {
             if (error instanceof Error) {
@@ -28,7 +31,7 @@ const LogInView = () => {
                 alert("An unknown error occurred: " + error);
             }
         }
-         
+
     }
 
     return (

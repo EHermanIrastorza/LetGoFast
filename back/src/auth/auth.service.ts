@@ -80,11 +80,15 @@ export class AuthService {
             
               return {
                 message: 'User logged in successfully',
-                // user: {
-                //   id: user.id,
-                //   email: user.email,
-                // },
                 token,
+                user: {
+                  id: user.id,
+                  name: user.name,
+                  email: user.email,
+                  city: user.city,
+                  birthday: user.birthday,
+                  credictCard: user.credictCard,
+                },
               };
             }
 
