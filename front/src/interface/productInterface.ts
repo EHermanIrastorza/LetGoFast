@@ -1,3 +1,5 @@
+import { IReviewProducts } from "./reviewInterface";
+
 export interface ProductInterface {
   id: string;
   productName: string;
@@ -8,4 +10,5 @@ export interface ProductInterface {
   productSpeed: string;
   productGear: string;
   productStyle: string;
+  reviews: IReviewProducts[];
 }
